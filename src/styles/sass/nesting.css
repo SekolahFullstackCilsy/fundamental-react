@@ -1,0 +1,10 @@
+div p {
+  font-weight: bold;
+  background-color: blue;
+}
+div span {
+  background-color: red;
+  width: 40000%;
+}
+
+/*# sourceMappingURL=nesting.css.map */

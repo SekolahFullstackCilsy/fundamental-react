@@ -1,0 +1,21 @@
+@import "font"
+$text-color: #ff0
+
+@mixin judul($propery)
+    font-weight: $propery
+    font-size: 50px
+    color: $text-color
+        
+.text-header 
+    @include judul($propery: bold   )
+
+%copyright
+    font-size: 10px
+    font-weight: lighter
+    color: green
+
+.text-footer
+    @extend %copyright
+
+
+    
