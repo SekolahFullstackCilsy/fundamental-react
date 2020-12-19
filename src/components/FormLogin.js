@@ -1,18 +1,21 @@
-import React from 'react';
+import React from "react";
 
 function Login() {
   const [users, setUsers] = React.useState([]);
   const [firstName, setfirstName] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [signedIn, setSignedIn] = React.useState(false);
-  function signup(name, password) {
-    if (!name || !password) {
-      return alert("Name atau dan password tdk blh kosong");
-    }
-    let Users = users.push({ name: name, password: password });
-    // setUsers(users.concat(Users))
-    setUsers([...users, Users]);
-  }
+  const initialState = [
+      {
+          id: 1,
+          name: "Baju Bola",
+          quantity: 1
+      }
+  ]
+  const [items, setItems] = React.useState(initialState)
+  const [cartItems, setCartItems] = React.useState([])  
+ 
+
   function signin(name, password) {
     if (name === "admin" && password === "admin") {
       setSignedIn(true);
@@ -23,41 +26,45 @@ function Login() {
   if (signedIn) {
     return (
       <div>
-        <p>Ini halaman dashboard</p>
-        <button onClick={() => setSignedIn(false)}>Logout</button>
+            <p style={{fontWeight: 'bold'}}> Dashboard, Anda memiliki {cartItems.length} items</p>{" "}
+            {
+                items.map((item) => (
+                    <span>
+                        {item.name}
+                        
+                        <button onClick={() => {
+                            
+                            setCartItems([...cartItems, item])
+                        }}>Add to cart</button>
+                  </span>  
+                ))
+            } 
+        <button onClick={() => setSignedIn(false)}> Logout </button>{" "}
       </div>
     );
   }
   return (
     <div>
-      {users.map((user, index) => (
-        <span key={index}>
-          {user.name} {user.password}
-        </span>
-      ))}
-      <br></br>
-      <label for="fname">First name:</label>
-      <br></br>
+     
+      <label for="fname"> First name: </label>{" "}
       <input
         type="text"
         id="fname"
         name="fname"
         value={firstName}
         onChange={(e) => setfirstName(e.target.value)}
-      />
-      <br />
-      <label for="lname">Password:</label>
-      <br />
+      />{" "}
+      
+      <label for="lname"> Password: </label> 
       <input
         type="password"
         id="lname"
         name="lname"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-      />
-      <br />
-      <br />
-      <button onClick={() => signin(firstName, password)}>Submit</button>
+      />{" "}
+      
+      <button onClick={() => signin(firstName, password)}> Submit </button>{" "}
     </div>
   );
 }
